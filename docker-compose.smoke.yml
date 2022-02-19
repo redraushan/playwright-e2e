@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  playwright:
+    # If PLAYWRIGHT_DOCKER_IMAGE_TAG is not defined tag defaults to latest
+    # image: amazonaws.com/playwright:${PLAYWRIGHT_DOCKER_IMAGE_TAG-latest}
+    image: localhost:5000/playwright:local
+    environment:
+      - CI=true
+      # If TEST_ENVIRONMENT is not defined E2E_ENVIRONMENT defaults to staging
+      - E2E_ENVIRONMENT=${TEST_ENVIRONMENT-staging}
+      # If TEST_BROWSER is not defined TEST_BROWSER defaults to chrome
+      - TEST_BROWSER=${TEST_BROWSER-chrome}
+    volumes:
+      - ./tests:/usr/src/app/src
+      - ./package.json:/usr/src/app/package.json
+
+    command: npm test
