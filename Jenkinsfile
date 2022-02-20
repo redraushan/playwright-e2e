@@ -33,6 +33,7 @@ pipeline {
                 changeset 'package.json'
                 expression {
                     // main branch or master branch
+                    echo env.GIT_BRANCH
                     return env.GIT_BRANCH == 'main'
                 }
             }
