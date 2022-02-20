@@ -2,7 +2,7 @@
   "name": "playwright-e2e",
   "version": "1.0.0",
   "main": "index.js",
-  "description": "1",
+  "description": "2",
   "license": "MIT",
   "scripts": {
     "test": "env-cmd -f ./.env.playwright --silent npx playwright test",
