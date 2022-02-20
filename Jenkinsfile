@@ -1,12 +1,13 @@
+/* groovylint-disable DuplicateStringLiteral */
 pipeline {
     agent any
-     environment {
-     	UNIQUE_BUILD_ID = "${GIT_COMMIT}".substring(0,7)
-     }
+    environment {
+        UNIQUE_BUILD_ID = "${GIT_COMMIT}".substring(0, 7)
+    }
     stages {
         stage('Build') {
             when {
-                changeset "package.json"
+                changeset 'package.json'
             }
             steps {
                 script {
@@ -14,23 +15,22 @@ pipeline {
                 }
             }
         }
-        
-        // Build new image and push to docker hub with UNIQUE_BUILD_ID tag 
+
+        // Build new image and push to docker hub with UNIQUE_BUILD_ID tag
         // and push image as UNIQUE_BUILD_ID
-        stage('Push to registry'){
+        stage('Push to registry') {
             when {
-                changeset "package.json"
+                changeset 'package.json'
             }
-             steps {
-                 sh 'make  push'
-             }
+            steps {
+                sh 'make  push'
+            }
         }
         // When PR merged to master branch, tag built to UNIQUE_BUILD_ID and push image as latest
-        stage('Push to registry as (latest)'){
+        stage('Push to registry as (latest)') {
             when {
-                changeset "package.json"
-            }
-            when {
+                /* groovylint-disable-next-line DuplicateStringLiteral */
+                changeset 'package.json'
                 expression {
                     return env.GIT_BRANCH == 'master'
                 }
