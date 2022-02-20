@@ -32,7 +32,8 @@ pipeline {
                 /* groovylint-disable-next-line DuplicateStringLiteral */
                 changeset 'package.json'
                 expression {
-                    return env.GIT_BRANCH == 'master'
+                    // main branch or master branch
+                    return env.GIT_BRANCH == 'main'
                 }
             }
             steps {
