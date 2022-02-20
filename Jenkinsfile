@@ -30,7 +30,6 @@ pipeline {
         stage('Push to registry as (latest)') {
             when {
                 /* groovylint-disable-next-line DuplicateStringLiteral */
-                echo env.GIT_BRANCH
                 changeset 'package.json'
                 expression {
                     // main branch or master branch
@@ -46,6 +45,7 @@ pipeline {
         always {
             script {
                 echo 'Pipeline finished!'
+                echo env.GIT_BRANCH
                 cleanWs()
             }
         }
